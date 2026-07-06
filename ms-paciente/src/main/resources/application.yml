@@ -1,0 +1,28 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: ms-paciente
+  datasource:
+    url: jdbc:mysql://localhost:3306/paciente_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: root   # Asegúrate de que esta sea tu clave de MySQL local
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop # 👈 ¡Excelente! Esto te va a vaciar las tablas al iniciar para probar limpio
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+# 👇 REVIFA ESTA SECCIÓN CORREGIDA 👇
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance: # 👈 Va alineado con "client"
+    prefer-ip-address: true
+    hostname: localhost
+    status-page-url-path: /

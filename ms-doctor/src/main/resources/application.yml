@@ -1,0 +1,28 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: ms-doctor
+  
+  datasource:
+    url: jdbc:mysql://localhost:3306/db_doctores?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: root
+    password: root  # <-- Tu clave de MySQL aquí (si no tiene, déjalo vacío)
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance: # 👈 Va alineado con "client"
+    prefer-ip-address: true
+    hostname: localhost
+    status-page-url-path: /

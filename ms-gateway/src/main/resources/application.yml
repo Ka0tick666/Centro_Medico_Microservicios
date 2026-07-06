@@ -1,0 +1,62 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: ms-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: r_pacientes
+          uri: lb://MS-PACIENTE
+          predicates:
+            - Path=/api/pacientes/**
+
+        - id: r_doctores
+          uri: lb://MS-DOCTOR
+          predicates:
+            - Path=/api/doctores/**
+
+        - id: r_citas
+          uri: lb://MS-CITA
+          predicates:
+            - Path=/api/citas/**
+
+        - id: r_historia
+          uri: lb://MS-HISTORIA-CLINICA
+          predicates:
+            - Path=/api/historias/**
+
+        - id: r_farmacia
+          uri: lb://MS-FARMACIA
+          predicates:
+            - Path=/api/farmacia/**
+
+        - id: r_laboratorio
+          uri: lb://MS-LABORATORIO
+          predicates:
+            - Path=/api/laboratorio/**
+            
+        - id: r_factura
+          uri: lb://MS-FACTURA
+          predicates:
+            - Path=/api/factura/**
+
+        - id: r_seguro
+          uri: lb://MS-SEGURO
+          predicates:
+            - Path=/api/seguro/**
+
+        - id: r_notificacion
+          uri: lb://MS-NOTIFICACION
+          predicates:
+            - Path=/api/notificacion/**
+
+        - id: r_metricacentro
+          uri: lb://MS-METRICACENTRO
+          predicates:
+            - Path=/api/metricacentro/**
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/

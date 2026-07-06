@@ -1,0 +1,27 @@
+server:
+  port: 8091
+
+spring:
+  application:
+    name: ms-metricacentro
+  
+  datasource:
+    url: jdbc:mysql://localhost:3306/db_metricacentro?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: root
+    password: root  # <-- Tu clave de MySQL local
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  
+  jpa:
+    hibernate:
+      ddl-auto: create-drop # Borra y crea tablas limpias al arrancar
+    show-sql: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
+    prefer-ip-address: false
+    status-page-url-path: /  # Manda el link de Eureka directo al JSON de estado
+    instance-id: ${spring.application.name}:${server.port}
