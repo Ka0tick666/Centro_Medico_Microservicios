@@ -5,9 +5,10 @@ spring:
   application:
     name: ms-paciente
   datasource:
-    url: jdbc:mysql://localhost:3306/paciente_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
-    username: root
-    password: root   # Asegúrate de que esta sea tu clave de MySQL local
+    # Si detecta AWS usa DB_HOST, si no, vuelve a tu localhost:3306/paciente_db local
+    url: jdbc:mysql://${DB_HOST:localhost}:3306/${DB_NAME:paciente_db}?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
+    username: ${DB_USER:root}
+    password: ${DB_PASSWORD:root}   # Asegúrate de que esta sea tu clave de MySQL local
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
@@ -17,7 +18,7 @@ spring:
       hibernate:
         format_sql: true
 
-# 👇 REVIFA ESTA SECCIÓN CORREGIDA 👇
+# 👇 SECCIÓN EUREKA 👇
 eureka:
   client:
     service-url:

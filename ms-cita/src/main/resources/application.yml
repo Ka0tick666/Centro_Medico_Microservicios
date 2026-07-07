@@ -6,9 +6,10 @@ spring:
     name: ms-cita
   
   datasource:
-    url: jdbc:mysql://localhost:3306/db_citas?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-    username: root
-    password: root  # <-- Tu clave de MySQL aquí si tienes
+    # Híbrido: Si detecta AWS usa DB_HOST, si no, vuelve a tu localhost:3306/db_citas local
+    url: jdbc:mysql://${DB_HOST:localhost}:3306/${DB_NAME:db_citas}?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: ${DB_USER:root}
+    password: ${DB_PASSWORD:root}  # <-- Tu clave de MySQL aquí
     driver-class-name: com.mysql.cj.jdbc.Driver
   
   jpa:
@@ -22,5 +23,5 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
   instance:
     prefer-ip-address: true
-    hostname: localhost  # 👈 AGREGA ESTA LÍNEA AQUÍ
+    hostname: localhost
     status-page-url-path: /
