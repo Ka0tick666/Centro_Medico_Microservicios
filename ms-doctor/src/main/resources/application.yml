@@ -1,30 +1,29 @@
 server:
-  port: 8082
+  port: 8082 # 👈 Puerto exclusivo para Doctor
 
 spring:
   application:
     name: ms-doctor
-  
   datasource:
-    # Híbrido: Si detecta AWS usa DB_HOST, si no, vuelve a tu localhost:3306/db_doctores local
-    url: jdbc:mysql://${DB_HOST:localhost}:3306/${DB_NAME:db_doctores}?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-    username: ${DB_USER:root}
-    password: ${DB_PASSWORD:root}  # <-- Tu clave de MySQL aquí
+    # Conectamos a la misma base de datos en Aiven con SSL habilitado
+    url: jdbc:mysql://${DB_HOST:mysql-26a1585c-centro-medico.g.aivencloud.com:12885}/${DB_NAME:defaultdb}?useSSL=true&requireSSL=true&verifyServerCertificate=false&allowPublicKeyRetrieval=true
+    username: ${DB_USER:avnadmin}
+    password: ${DB_PASSWORD:AVNS_FOJHhGkvfWqMm2wauK8}
     driver-class-name: com.mysql.cj.jdbc.Driver
-  
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create-drop # 👈 Mantenemos el create-drop para que limpie y carge el DataFaker de doctores
     show-sql: true
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
 
+# 👇 SECCIÓN EUREKA 👇
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
-  instance: # 👈 Va alineado con "client"
+  instance:
     prefer-ip-address: true
     hostname: localhost
     status-page-url-path: /
