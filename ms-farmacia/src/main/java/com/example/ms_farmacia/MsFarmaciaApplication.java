@@ -17,3 +17,4 @@ public class MsFarmaciaApplication {
 //cd "C:\Users\Plaza Vespucio\Desktop\Centro_Medico\ms-farmacia"<-1
 //mvn clean compile spring-boot:run<-2
 //http://localhost:8085/swagger-ui/index.html<-----SWAGGER<-3
+//http://localhost:8085/api/farmacia/listar <---------apiAIVENSQL
