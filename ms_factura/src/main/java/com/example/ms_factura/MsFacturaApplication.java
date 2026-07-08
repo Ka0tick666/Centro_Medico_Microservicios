@@ -17,3 +17,4 @@ public class MsFacturaApplication {
 //cd "C:\Users\Plaza Vespucio\Desktop\Centro_Medico\ms_factura"<-1
 //mvn clean compile spring-boot:run<-2
 //http://localhost:8087/swagger-ui/index.html<----SWAGGER<-3
+//http://localhost:8087/api/factura/listar
