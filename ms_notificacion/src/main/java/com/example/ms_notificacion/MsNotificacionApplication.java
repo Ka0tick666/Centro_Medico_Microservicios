@@ -17,3 +17,4 @@ public class MsNotificacionApplication {
 //cd "C:\Users\Plaza Vespucio\Desktop\Centro_Medico\ms_notificacion"<-1
 //mvn clean compile spring-boot:run<-2
 //http://localhost:8089/swagger-ui/index.html<----SWAGGER<-3
+//http://localhost:8089/api/notificacion/listar

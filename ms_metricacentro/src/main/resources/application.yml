@@ -1,27 +1,29 @@
 server:
-  port: 8091
+  port: 8090 # 👈 Puerto exclusivo para el Centralizador de Métricas
 
 spring:
   application:
     name: ms-metricacentro
-  
   datasource:
-    url: jdbc:mysql://localhost:3306/db_metricacentro?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-    username: root
-    password: root  # <-- Tu clave de MySQL local
+    # Conexión directa al clúster de Aiven con SSL activo
+    url: jdbc:mysql://${DB_HOST:mysql-26a1585c-centro-medico.g.aivencloud.com:12885}/${DB_NAME:defaultdb}?useSSL=true&requireSSL=true&verifyServerCertificate=false&allowPublicKeyRetrieval=true
+    username: ${DB_USER:avnadmin}
+    password: ${DB_PASSWORD:AVNS_FOJHhGkvfWqMm2wauK8}
     driver-class-name: com.mysql.cj.jdbc.Driver
-  
   jpa:
     hibernate:
-      ddl-auto: create-drop # Borra y crea tablas limpias al arrancar
+      ddl-auto: create-drop # 👈 Limpia y corre el DataFaker analítico al arrancar
     show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
 
+# 👇 SECCIÓN EUREKA 👇
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
   instance:
+    prefer-ip-address: true
     hostname: localhost
-    prefer-ip-address: false
-    status-page-url-path: /  # Manda el link de Eureka directo al JSON de estado
-    instance-id: ${spring.application.name}:${server.port}
+    status-page-url-path: /
