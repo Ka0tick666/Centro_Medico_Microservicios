@@ -17,3 +17,4 @@ public class MsSeguroApplication {
 //cd "C:\Users\Plaza Vespucio\Desktop\Centro_Medico\ms_seguro"<-1
 //mvn clean compile spring-boot:run<-2
 //http://localhost:8088/swagger-ui/index.html<-----SWAGGER<-3
+//http://localhost:8088/api/seguro/listar
