@@ -17,3 +17,5 @@ public class MsLaboratorioApplication {
 //cd "C:\Users\Plaza Vespucio\Desktop\Centro_Medico\ms-laboratorio"<-1
 //mvn clean compile spring-boot:run<-2
 //http://localhost:8086/swagger-ui/index.html<----SWAGGER<-3
+//http://localhost:8086/api/laboratorio/ordenes
+//http://localhost:8086/api/laboratorio/paciente/1

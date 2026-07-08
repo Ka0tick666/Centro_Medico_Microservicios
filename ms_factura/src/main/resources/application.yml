@@ -1,27 +1,29 @@
 server:
-  port: 8087
+  port: 8087 # 👈 Puerto exclusivo para Finanzas y Facturación
 
 spring:
   application:
     name: ms-factura
-  
   datasource:
-    url: jdbc:mysql://localhost:3306/db_factura?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-    username: root
-    password: root  # 👈 Pon aquí tu contraseña local de MySQL si es distinta
+    # El mismo motor centralizado en Aiven con protección SSL
+    url: jdbc:mysql://${DB_HOST:mysql-26a1585c-centro-medico.g.aivencloud.com:12885}/${DB_NAME:defaultdb}?useSSL=true&requireSSL=true&verifyServerCertificate=false&allowPublicKeyRetrieval=true
+    username: ${DB_USER:avnadmin}
+    password: ${DB_PASSWORD:AVNS_FOJHhGkvfWqMm2wauK8}
     driver-class-name: com.mysql.cj.jdbc.Driver
-  
   jpa:
     hibernate:
-      ddl-auto: create-drop # Borra y crea las tablas limpias al arrancar para meter el DataFaker
+      ddl-auto: create-drop # 👈 Para limpiar e inyectar el DataFaker financiero al arrancar
     show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
 
+# 👇 SECCIÓN EUREKA 👇
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
   instance:
+    prefer-ip-address: true
     hostname: localhost
-    prefer-ip-address: false
-    status-page-url-path: /  # Esto hace que el link de Eureka apunte directo a tu RaizController (el JSON)
-    instance-id: ${spring.application.name}:${server.port}
+    status-page-url-path: /
