@@ -17,3 +17,4 @@ public class MsHistoriaClinicaApplication {
 //cd "C:\Users\Plaza Vespucio\Desktop\Centro_Medico\ms-historia-clinica"<-1
 //mvn clean compile spring-boot:run<--- prender el microservicio<-2
 //http://localhost:8084/swagger-ui/index.html<------SWAGGER<-3
+//http://localhost:8084/api/historia/paciente/1/completo<--- api AIVENSQL

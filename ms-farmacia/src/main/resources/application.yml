@@ -1,21 +1,24 @@
 server:
-  port: 8085
+  port: 8085 # 👈 Puerto exclusivo para Farmacia
 
 spring:
   application:
     name: ms-farmacia
-  
   datasource:
-    url: jdbc:mysql://localhost:3306/db_farmacia?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-    username: root
-    password: root  # <-- Tu clave de MySQL aquí
+    # Conexión directa al MySQL de Aiven usando el mismo SSL perrito
+    url: jdbc:mysql://${DB_HOST:mysql-26a1585c-centro-medico.g.aivencloud.com:12885}/${DB_NAME:defaultdb}?useSSL=true&requireSSL=true&verifyServerCertificate=false&allowPublicKeyRetrieval=true
+    username: ${DB_USER:avnadmin}
+    password: ${DB_PASSWORD:AVNS_FOJHhGkvfWqMm2wauK8}
     driver-class-name: com.mysql.cj.jdbc.Driver
-  
   jpa:
     hibernate:
-      ddl-auto: create-drop # Limpia y crea las tablas frescas al arrancar
+      ddl-auto: create-drop # 👈 Para que limpie y ejecute el DataFaker de medicamentos/stock al arrancar
     show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
 
+# 👇 SECCIÓN EUREKA 👇
 eureka:
   client:
     service-url:
