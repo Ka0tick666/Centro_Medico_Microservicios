@@ -17,3 +17,4 @@ public class MsCitaApplication {
 //cd "C:\Users\Plaza Vespucio\Desktop\Centro_Medico\ms-cita"<-1
 //mvn clean compile spring-boot:run<-2
 //http://localhost:8083/swagger-ui/index.html<-----SWAGGER<-3
+//http://localhost:8083/api/citas<----- api AIVENSQL

@@ -1,21 +1,24 @@
 server:
-  port: 8084
+  port: 8084 # 👈 Puerto exclusivo para Historias Clínicas
 
 spring:
   application:
     name: ms-historia-clinica
-  
   datasource:
-    url: jdbc:mysql://localhost:3306/db_historial?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-    username: root
-    password: root  # <-- Tu clave de MySQL aquí
+    # Conexión directa al MySQL de Aiven usando SSL perrito
+    url: jdbc:mysql://${DB_HOST:mysql-26a1585c-centro-medico.g.aivencloud.com:12885}/${DB_NAME:defaultdb}?useSSL=true&requireSSL=true&verifyServerCertificate=false&allowPublicKeyRetrieval=true
+    username: ${DB_USER:avnadmin}
+    password: ${DB_PASSWORD:AVNS_FOJHhGkvfWqMm2wauK8}
     driver-class-name: com.mysql.cj.jdbc.Driver
-  
   jpa:
     hibernate:
-      ddl-auto: create-drop # Limpia las tablas al arrancar para que pruebes fresquito
+      ddl-auto: create-drop # 👈 Para que limpie y ejecute el DataFaker de historias clínicas al arrancar
     show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
 
+# 👇 SECCIÓN EUREKA 👇
 eureka:
   client:
     service-url:
