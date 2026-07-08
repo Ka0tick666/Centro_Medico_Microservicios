@@ -16,3 +16,4 @@ public class MsDoctorApplication {
 //cd "C:\Users\Plaza Vespucio\Desktop\Centro_Medico\ms-doctor"<-1
 //mvn clean compile spring-boot:run<-2
 //http://localhost:8082/swagger-ui/index.html<------SWAGGER<-3
+//http://localhost:8082/api/doctores<------ api AIVENSQL
