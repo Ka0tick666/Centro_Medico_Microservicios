@@ -5,14 +5,14 @@ spring:
   application:
     name: ms-paciente
   datasource:
-    # Si detecta AWS usa DB_HOST, si no, vuelve a tu localhost:3306/paciente_db local
-    url: jdbc:mysql://${DB_HOST:localhost}:3306/${DB_NAME:paciente_db}?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
-    username: ${DB_USER:root}
-    password: ${DB_PASSWORD:root}   # Asegúrate de que esta sea tu clave de MySQL local
+    # Conexión directa a Aiven con SSL habilitado si no existen variables de entorno
+    url: jdbc:mysql://${DB_HOST:mysql-26a1585c-centro-medico.g.aivencloud.com:12885}/${DB_NAME:defaultdb}?useSSL=true&requireSSL=true&verifyServerCertificate=false&allowPublicKeyRetrieval=true
+    username: ${DB_USER:avnadmin}
+    password: ${DB_PASSWORD:AVNS_FOJHhGkvfWqMm2wauK8}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
-      ddl-auto: create-drop # 👈 ¡Excelente! Esto te va a vaciar las tablas al iniciar para probar limpio
+      ddl-auto: create-drop # 👈 Dejado tal cual para que el DataFaker cargue los datos falsos en cada inicio
     show-sql: true
     properties:
       hibernate:
@@ -23,7 +23,7 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
-  instance: # 👈 Va alineado con "client"
+  instance:
     prefer-ip-address: true
     hostname: localhost
     status-page-url-path: /
